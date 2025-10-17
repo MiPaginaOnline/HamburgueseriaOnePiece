@@ -6,6 +6,7 @@
   <title>OnePiece Burger — Hamburgueseria</title>
   <meta name="description" content="Vive la aventura gastronómica en OnePiece Burger, hamburguesería temática marinera.">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root{
       --bg:#090e1a;
@@ -39,11 +40,21 @@
       border:1px solid rgba(255,255,255,0.05);
       box-shadow:0 6px 25px rgba(0,0,0,0.4);
       z-index:999;
+      transition: all 0.3s ease;
     }
     .logo{font-weight:800;font-size:1.2rem;color:var(--primary)}
     nav a{margin:0 10px;font-weight:600;position:relative;}
     nav a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--secondary);transition:.3s}
     nav a:hover::after{width:100%}
+
+    /* Mobile menu */
+    .mobile-menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;}
+    .mobile-nav{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--bg);z-index:1000;flex-direction:column;justify-content:center;align-items:center;transition:transform 0.3s ease;}
+    .mobile-nav.active{display:flex;animation:slideIn 0.3s ease forwards;}
+    .mobile-nav.closing{animation:slideOut 0.3s ease forwards;}
+    .mobile-nav a{font-size:1.5rem;margin:15px 0;padding:10px 20px;border-radius:8px;transition:background 0.3s;}
+    .mobile-nav a:hover{background:var(--glass);}
+    .close-btn{position:absolute;top:20px;right:20px;background:none;border:none;color:var(--text);font-size:1.8rem;cursor:pointer;}
 
     /* Hero */
     .hero{height:100vh;background:url('https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
@@ -63,15 +74,30 @@
     @keyframes waveMove {from{transform:translateX(0);}to{transform:translateX(-50px);}}
 
     /* Sections */
-    section{padding:120px 1rem;max-width:1100px;margin:0 auto;position:relative;transition:all .5s ease;}
+    section{
+      padding:80px 1rem;
+      max-width:1100px;
+      margin:0 auto;
+      position:relative;
+      transition:all .5s ease;
+      border-left:4px solid var(--section-border);
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     section:nth-of-type(even){background:rgba(255,255,255,0.02);border-radius:24px;}
-    section h2{text-align:center;font-size:2rem;color:var(--primary);margin-bottom:20px;animation:fadeInDown .8s ease forwards;}
+    section h2{text-align:center;font-size:2rem;color:var(--primary);margin-bottom:20px;}
     section p.sub{color:var(--muted);text-align:center;margin-bottom:40px;}
 
     /* About */
     .about{display:flex;align-items:center;gap:40px;flex-wrap:wrap;justify-content:center;}
-    .about img{width:100%;max-width:600px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.5);animation:fadeInLeft 1s ease forwards;filter:grayscale(100%) brightness(120%);}
-    .about-text{flex:1;animation:fadeInRight 1s ease forwards;}
+    .about img{width:100%;max-width:600px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.5);filter:grayscale(100%) brightness(120%);}
+    .about-text{flex:1;}
 
     /* Menu */
     .menu-container{display:flex;justify-content:center;margin-top:40px;}
@@ -89,6 +115,15 @@
     .gallery img{width:100%;height:250px;object-fit:cover;border-radius:16px;transition:transform .4s, box-shadow .4s;}
     .gallery img:hover{transform:scale(1.05);box-shadow:0 10px 25px rgba(0,0,0,0.5);}
 
+    /* Schedule */
+    .schedule{display:flex;justify-content:center;margin-top:40px;}
+    .schedule-table{width:100%;max-width:500px;border-collapse:collapse;}
+    .schedule-table tr{border-bottom:1px solid rgba(255,255,255,0.1);}
+    .schedule-table tr:last-child{border-bottom:none;}
+    .schedule-table td{padding:12px 15px;}
+    .schedule-table td:first-child{font-weight:600;color:var(--primary);}
+    .schedule-table td:last-child{text-align:right;}
+
     /* Contact */
     form{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:auto;}
     input,textarea{background:rgba(255,255,255,0.05);border:none;padding:10px;border-radius:10px;color:var(--text);}
@@ -102,10 +137,23 @@
     @keyframes fadeInDown{from{transform:translateY(-30px);opacity:0}to{transform:translateY(0);opacity:1}}
     @keyframes fadeInLeft{from{transform:translateX(-40px);opacity:0}to{transform:translateX(0);opacity:1}}
     @keyframes fadeInRight{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
+    @keyframes slideIn{from{transform:translateX(-100%);}to{transform:translateX(0);}}
+    @keyframes slideOut{from{transform:translateX(0);}to{transform:translateX(-100%);}}
 
     /* Button */
     .btn{background:linear-gradient(90deg,var(--primary),var(--secondary));border:none;color:#111;padding:8px 14px;border-radius:10px;font-weight:700;margin-top:8px;cursor:pointer;transition:.3s;}
     .btn:hover{transform:scale(1.05)}
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .desktop-nav{display:none;}
+      .mobile-menu-btn{display:block;}
+      section{padding:60px 1rem;margin-bottom:30px;}
+      .hero h1{font-size:2.2rem;}
+      section h2{font-size:1.7rem;}
+      nav{display:none;}
+      .mobile-menu-btn{display:block;}
+    }
   </style>
 </head>
 <body>
@@ -114,10 +162,26 @@
     <nav>
       <a href="#about">Nosotros</a>
       <a href="#menu">Carta</a>
+      <a href="#schedule">Horario</a>
       <a href="#crew">Nuestro Equipo</a>
       <a href="#gallery">Galería</a>
       <a href="#contact">Contacto</a>
     </nav>
+    <button class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="#about" class="mobile-nav-link">Nosotros</a>
+    <a href="#menu" class="mobile-nav-link">Carta</a>
+    <a href="#schedule" class="mobile-nav-link">Horario</a>
+    <a href="#crew" class="mobile-nav-link">Nuestro Equipo</a>
+    <a href="#gallery" class="mobile-nav-link">Galería</a>
+    <a href="#contact" class="mobile-nav-link">Contacto</a>
   </div>
 
   <section class="hero">
@@ -143,9 +207,23 @@
     <h2>Precios Hamburguesas</h2>
     <p class="sub">Hamburguesas y delicias para todos los gustos.</p>
     <div class="menu-container">
-      <!-- REEMPLAZA LA SIGUIENTE LÍNEA CON TU IMAGEN LOCAL -->
-      <!-- <img src="URL_DE_TU_IMAGEN" alt="Carta de OnePiece Burger" class="menu-image"> -->
       <img src="IMG_7507.jpeg" alt="Carta de OnePiece Burger" class="menu-image">
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2>Horario</h2>
+    <p class="sub">Estamos abiertos todos los días para servirte</p>
+    <div class="schedule">
+      <table class="schedule-table">
+        <tr><td>Viernes</td><td>10:00–23:30</td></tr>
+        <tr><td>Sábado</td><td>10:00–23:30</td></tr>
+        <tr><td>Domingo</td><td>10:00–23:30</td></tr>
+        <tr><td>Lunes</td><td>10:00–23:30</td></tr>
+        <tr><td>Martes</td><td>10:00–23:30</td></tr>
+        <tr><td>Miércoles</td><td>10:00–23:30</td></tr>
+        <tr><td>Jueves</td><td>10:00–23:30</td></tr>
+      </table>
     </div>
   </section>
 
@@ -162,12 +240,6 @@
     <h2>Galería</h2>
     <p class="sub">Explora nuestro ambiente y nuestras delicias.</p>
     <div class="gallery">
-      <!-- REEMPLAZA LAS SIGUIENTES LÍNEAS CON TUS IMÁGENES LOCALES -->
-      <!-- 
-      <img src="URL_IMAGEN_1" alt="Hamburguesa marinera">
-      <img src="URL_IMAGEN_2" alt="Decoración marinera">
-      <img src="URL_IMAGEN_3" alt="Interior del local">
-      -->
       <img src="IMG_7508.jpeg" alt="Hamburguesa doble Carne Smash">
       <img src="IMG_7509.jpeg" alt="Hamburguesas">
       <img src="IMG_7510.jpeg" alt="Zoro Roronoa">
@@ -190,5 +262,69 @@
     <p>☠️ OnePiece Burger — 2025 © Todos los derechos reservados</p>
     <p style="color:var(--muted)">El sabor del mar te espera en cada mordisco.</p>
   </footer>
+
+  <script>
+    // Mobile menu functionality
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeBtn = document.querySelector('.close-btn');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function openMobileMenu() {
+      mobileNav.classList.add('active');
+      mobileNav.classList.remove('closing');
+    }
+
+    function closeMobileMenu() {
+      mobileNav.classList.add('closing');
+      setTimeout(() => {
+        mobileNav.classList.remove('active');
+        mobileNav.classList.remove('closing');
+      }, 300);
+    }
+
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+    closeBtn.addEventListener('click', closeMobileMenu);
+
+    // Close mobile menu when a link is clicked
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
+    });
+
+    // Smooth scrolling for all navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
