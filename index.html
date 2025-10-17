@@ -275,6 +275,50 @@
       font-weight: 600;
     }
 
+    /* Assistant Notification */
+    .assistant-notification {
+      position: fixed;
+      bottom: 160px;
+      right: 20px;
+      background: var(--primary);
+      color: #111;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 996;
+      display: none;
+      max-width: 250px;
+      animation: slideInNotification 0.3s ease;
+    }
+    .assistant-notification.active {
+      display: block;
+    }
+    .assistant-notification p {
+      margin: 0 0 10px 0;
+      font-weight: 600;
+    }
+    .assistant-notification button {
+      background: var(--bg);
+      color: var(--text);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    @keyframes slideInNotification {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
       70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
@@ -308,6 +352,18 @@
       transform: scale(1.1);
     }
 
+    /* Form Success Message */
+    .form-success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      color: #4CAF50;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 15px;
+      display: none;
+    }
+
     /* Animations */
     @keyframes fadeInUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
     @keyframes fadeInDown{from{transform:translateY(-30px);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -339,6 +395,10 @@
         height: 380px;
         right: 10px;
       }
+      .assistant-notification {
+        right: 10px;
+        max-width: 280px;
+      }
     }
   </style>
 </head>
@@ -349,10 +409,10 @@
       <a href="#about">Nosotros</a>
       <a href="#menu">Carta</a>
       <a href="#schedule">Horario</a>
-      <a href="#location">Ubicación</a>
       <a href="#crew">Nuestro Equipo</a>
       <a href="#gallery">Galería</a>
-      <a href="#contact">Contacto</a>
+      <a href="#location">Ubicación</a>
+      <a href="#contact">Reservas</a>
     </nav>
     <button class="mobile-menu-btn">
       <i class="fas fa-bars"></i>
@@ -366,10 +426,10 @@
     <a href="#about" class="mobile-nav-link">Nosotros</a>
     <a href="#menu" class="mobile-nav-link">Carta</a>
     <a href="#schedule" class="mobile-nav-link">Horario</a>
-    <a href="#location" class="mobile-nav-link">Ubicación</a>
     <a href="#crew" class="mobile-nav-link">Nuestro Equipo</a>
     <a href="#gallery" class="mobile-nav-link">Galería</a>
-    <a href="#contact" class="mobile-nav-link">Contacto</a>
+    <a href="#location" class="mobile-nav-link">Ubicación</a>
+    <a href="#contact" class="mobile-nav-link">Reservas</a>
   </div>
 
   <section class="hero">
@@ -415,14 +475,6 @@
     </div>
   </section>
 
-  <section id="location">
-    <h2>Ubicación</h2>
-    <p class="sub">Encuéntranos en el corazón de Tarragona</p>
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.113370557387!2d1.255415215424835!3d41.31590297927086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a37f5b6f5b5b5b%3A0x9b8c5b5b5b5b5b5b!2sPla%C3%A7a%20de%20la%20Font%2C%2047%2C%2043003%20Tarragona!5e0!3m2!1ses!2ses!4v1647000000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-  </section>
-
   <section id="crew">
     <h2>Nuestro Equipo</h2>
     <p class="sub">Cada miembro aporta un toque único a nuestra experiencia gastronómica.</p>
@@ -442,21 +494,35 @@
     </div>
   </section>
 
+  <!-- Ubicación ahora está aquí, debajo de Galería y encima de Reservas -->
+  <section id="location">
+    <h2>Ubicación</h2>
+    <p class="sub">Encuéntranos en el corazón de Tarragona</p>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.113370557387!2d1.255415215424835!3d41.31590297927086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a37f5b6f5b5b5b%3A0x9b8c5b5b5b5b5b5b!2sPla%C3%A7a%20de%20la%20Font%2C%2047%2C%2043003%20Tarragona!5e0!3m2!1ses!2ses!4v1647000000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
   <section id="contact">
-    <h2>Reserva o Contáctanos</h2>
+    <h2>Reserva tu Mesa</h2>
     <p class="sub">Zarpa hacia una experiencia inolvidable. ¡Te esperamos en nuestra hamburguesería!</p>
     <form id="reservationForm">
       <input type="text" id="name" placeholder="Nombre" required>
+      <input type="email" id="email" placeholder="Correo electrónico" required>
       <input type="tel" id="phone" placeholder="Teléfono" required>
+      <input type="number" id="people" placeholder="Número de personas" min="1" required>
       <input type="datetime-local" id="datetime" required>
       <textarea rows="3" id="message" placeholder="Mensaje o solicitud especial"></textarea>
       <button class="btn" type="submit">Reservar Mesa</button>
     </form>
+    <div class="form-success" id="formSuccess">
+      ¡Reserva enviada correctamente! TE CONTACTAREMOS PRONTO PARA CONFIRMAR.
+    </div>
   </section>
 
   <footer>
     <p>☠️ OnePiece Burger — 2025 © Todos los derechos reservados</p>
-    <p style="color:var(--muted)">El sabor del mar te espera en cada mordisco.</p>
+    <p style="color:var(--muted)">El sabor de OnePiece te espera en cada mordisco.</p>
     <a href="https://www.instagram.com/onepice_burger" target="_blank" class="instagram-icon">
       <i class="fab fa-instagram"></i>
     </a>
@@ -491,6 +557,13 @@
         <i class="fas fa-paper-plane"></i>
       </button>
     </div>
+  </div>
+
+  <!-- Assistant Notification -->
+  <div class="assistant-notification" id="assistantNotification">
+    <p>¡Hola! ¿Tienes alguna duda?</p>
+    <button id="notificationYes">Sí, tengo</button>
+    <button id="notificationNo">No, gracias</button>
   </div>
 
   <script>
@@ -556,12 +629,14 @@
       observer.observe(section);
     });
 
-    // WhatsApp Reservation Form
+    // Email Reservation Form
     document.getElementById('reservationForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
       const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
+      const people = document.getElementById('people').value;
       const datetime = document.getElementById('datetime').value;
       const message = document.getElementById('message').value;
       
@@ -570,18 +645,30 @@
       const formattedDate = dateObj.toLocaleDateString('es-ES');
       const formattedTime = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
       
-      // Create WhatsApp message
-      const whatsappMessage = `Hola, me gustaría hacer una reserva en OnePiece Burger:%0A%0A` +
-                             `*Nombre:* ${name}%0A` +
-                             `*Teléfono:* ${phone}%0A` +
-                             `*Fecha y hora:* ${formattedDate} a las ${formattedTime}%0A` +
-                             `*Mensaje:* ${message || 'Sin mensaje adicional'}`;
+      // Create email subject and body
+      const subject = `Nueva Reserva - ${name}`;
+      const body = `Nueva reserva recibida:%0A%0A` +
+                  `*Nombre:* ${name}%0A` +
+                  `*Email:* ${email}%0A` +
+                  `*Teléfono:* ${phone}%0A` +
+                  `*Número de personas:* ${people}%0A` +
+                  `*Fecha y hora:* ${formattedDate} a las ${formattedTime}%0A` +
+                  `*Mensaje:* ${message || 'Sin mensaje adicional'}`;
       
-      // Open WhatsApp with the message
-      window.open(`https://wa.me/34662933832?text=${whatsappMessage}`, '_blank');
+      // Send email (using mailto as fallback)
+      window.location.href = `mailto:onepieceburger@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      
+      // Show success message
+      const successMessage = document.getElementById('formSuccess');
+      successMessage.style.display = 'block';
       
       // Reset form
       this.reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 5000);
     });
 
     // Assistant functionality
@@ -591,6 +678,9 @@
     const assistantMessages = document.getElementById('assistantMessages');
     const assistantInput = document.getElementById('assistantInput');
     const assistantSend = document.getElementById('assistantSend');
+    const assistantNotification = document.getElementById('assistantNotification');
+    const notificationYes = document.getElementById('notificationYes');
+    const notificationNo = document.getElementById('notificationNo');
 
     // Normalize text (remove accents and convert to lowercase)
     function normalizeText(text) {
@@ -610,8 +700,8 @@
       'ubicacion': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
       'donde': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
       'direccion': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
-      'reserva': 'Puedes hacer tu reserva a través del formulario en la sección "Reserva o Contáctanos" o directamente por WhatsApp.',
-      'reservar': 'Puedes hacer tu reserva a través del formulario en la sección "Reserva o Contáctanos" o directamente por WhatsApp.',
+      'reserva': 'Puedes hacer tu reserva a través del formulario en la sección "Reservas" o directamente por WhatsApp.',
+      'reservar': 'Puedes hacer tu reserva a través del formulario en la sección "Reservas" o directamente por WhatsApp.',
       'contacto': 'Puedes contactarnos a través del formulario de reservas o por WhatsApp al 662 93 38 32.',
       'telefono': 'Puedes contactarnos por WhatsApp al 662 93 38 32.',
       'instagram': 'Síguenos en Instagram: @onepice_burger',
@@ -674,6 +764,7 @@
     // Event listeners for assistant
     assistantBtn.addEventListener('click', () => {
       assistantPanel.classList.toggle('active');
+      assistantNotification.classList.remove('active');
     });
 
     assistantClose.addEventListener('click', () => {
@@ -687,6 +778,21 @@
         handleAssistantInput();
       }
     });
+
+    // Assistant notification functionality
+    notificationYes.addEventListener('click', () => {
+      assistantNotification.classList.remove('active');
+      assistantPanel.classList.add('active');
+    });
+
+    notificationNo.addEventListener('click', () => {
+      assistantNotification.classList.remove('active');
+    });
+
+    // Show assistant notification after 5 seconds
+    setTimeout(() => {
+      assistantNotification.classList.add('active');
+    }, 5000);
   </script>
 </body>
 </html>
