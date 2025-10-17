@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>OnePiece Burger — Hamburgueseria</title>
+  <title>OnePiece Burger — Hamburguesería</title>
   <meta name="description" content="Vive la aventura gastronómica en OnePiece Burger, hamburguesería temática marinera.">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -168,6 +168,113 @@
       transform: scale(1.1);
       box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
     }
+
+    /* Assistant Button */
+    .assistant-btn {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background-color: var(--primary);
+      color: #111;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 998;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .assistant-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Assistant Panel */
+    .assistant-panel {
+      position: fixed;
+      bottom: 160px;
+      right: 20px;
+      width: 320px;
+      height: 400px;
+      background: var(--bg);
+      border: 1px solid var(--primary);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 997;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .assistant-panel.active {
+      display: flex;
+    }
+    .assistant-header {
+      background: var(--primary);
+      color: #111;
+      padding: 12px 16px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .assistant-close {
+      background: none;
+      border: none;
+      color: #111;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .assistant-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .assistant-message {
+      padding: 10px 14px;
+      border-radius: 12px;
+      max-width: 85%;
+      line-height: 1.4;
+    }
+    .assistant-message.bot {
+      background: var(--glass);
+      align-self: flex-start;
+    }
+    .assistant-message.user {
+      background: var(--primary);
+      color: #111;
+      align-self: flex-end;
+    }
+    .assistant-input {
+      display: flex;
+      padding: 12px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .assistant-input input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      color: var(--text);
+    }
+    .assistant-input button {
+      background: var(--primary);
+      color: #111;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-left: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
       70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
@@ -222,10 +329,15 @@
       section h2{font-size:1.8rem;} /* Títulos de sección más grandes en móvil */
       nav{display:none;}
       .mobile-menu-btn{display:block;}
-      .whatsapp-btn {
+      .whatsapp-btn, .assistant-btn {
         width: 55px;
         height: 55px;
         font-size: 24px;
+      }
+      .assistant-panel {
+        width: 300px;
+        height: 380px;
+        right: 10px;
       }
     }
   </style>
@@ -273,7 +385,7 @@
 
   <section id="about">
     <h2>Sobre Nosotros</h2>
-    <p class="sub">Una hamburguesería temática en OnePeace, prometemos Calidad.</p>
+    <p class="sub">Una hamburguesería temática de One Piece, prometemos calidad.</p>
     <div class="about">
       <img src="IMG_7511.jpeg" alt="Local temático marinero">
     </div>
@@ -332,12 +444,12 @@
 
   <section id="contact">
     <h2>Reserva o Contáctanos</h2>
-    <p class="sub">Zarpa hacia una experiencia inolvidable. ¡Te esperamos en nuestra Hamburgueseria!</p>
-    <form onsubmit="event.preventDefault();alert('Gracias por contactar con OnePiece Burger. ¡Nos vemos pronto!');">
-      <input type="text" placeholder="Nombre" required>
-      <input type="tel" placeholder="Teléfono" required>
-      <input type="datetime-local" required>
-      <textarea rows="3" placeholder="Mensaje o solicitud especial"></textarea>
+    <p class="sub">Zarpa hacia una experiencia inolvidable. ¡Te esperamos en nuestra hamburguesería!</p>
+    <form id="reservationForm">
+      <input type="text" id="name" placeholder="Nombre" required>
+      <input type="tel" id="phone" placeholder="Teléfono" required>
+      <input type="datetime-local" id="datetime" required>
+      <textarea rows="3" id="message" placeholder="Mensaje o solicitud especial"></textarea>
       <button class="btn" type="submit">Reservar Mesa</button>
     </form>
   </section>
@@ -354,6 +466,32 @@
   <a href="https://wa.me/34662933832" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
+
+  <!-- Assistant Button -->
+  <div class="assistant-btn" id="assistantBtn">
+    <i class="fas fa-robot"></i>
+  </div>
+
+  <!-- Assistant Panel -->
+  <div class="assistant-panel" id="assistantPanel">
+    <div class="assistant-header">
+      <span>Asistente OnePiece</span>
+      <button class="assistant-close" id="assistantClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="assistant-messages" id="assistantMessages">
+      <div class="assistant-message bot">
+        ¡Hola! Soy tu asistente de OnePiece Burger. ¿En qué puedo ayudarte? Puedes preguntarme sobre horarios, menú, ubicación o reservas.
+      </div>
+    </div>
+    <div class="assistant-input">
+      <input type="text" id="assistantInput" placeholder="Escribe tu pregunta...">
+      <button id="assistantSend">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
 
   <script>
     // Mobile menu functionality
@@ -416,6 +554,138 @@
     // Observe all sections except hero
     document.querySelectorAll('section:not(.hero)').forEach(section => {
       observer.observe(section);
+    });
+
+    // WhatsApp Reservation Form
+    document.getElementById('reservationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const datetime = document.getElementById('datetime').value;
+      const message = document.getElementById('message').value;
+      
+      // Format the date and time
+      const dateObj = new Date(datetime);
+      const formattedDate = dateObj.toLocaleDateString('es-ES');
+      const formattedTime = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+      
+      // Create WhatsApp message
+      const whatsappMessage = `Hola, me gustaría hacer una reserva en OnePiece Burger:%0A%0A` +
+                             `*Nombre:* ${name}%0A` +
+                             `*Teléfono:* ${phone}%0A` +
+                             `*Fecha y hora:* ${formattedDate} a las ${formattedTime}%0A` +
+                             `*Mensaje:* ${message || 'Sin mensaje adicional'}`;
+      
+      // Open WhatsApp with the message
+      window.open(`https://wa.me/34662933832?text=${whatsappMessage}`, '_blank');
+      
+      // Reset form
+      this.reset();
+    });
+
+    // Assistant functionality
+    const assistantBtn = document.getElementById('assistantBtn');
+    const assistantPanel = document.getElementById('assistantPanel');
+    const assistantClose = document.getElementById('assistantClose');
+    const assistantMessages = document.getElementById('assistantMessages');
+    const assistantInput = document.getElementById('assistantInput');
+    const assistantSend = document.getElementById('assistantSend');
+
+    // Normalize text (remove accents and convert to lowercase)
+    function normalizeText(text) {
+      return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    // Assistant responses
+    const responses = {
+      'hola': '¡Hola! ¿En qué puedo ayudarte? Puedes preguntarme sobre nuestro horario, menú, ubicación o cómo hacer una reserva.',
+      'horario': 'Estamos abiertos todos los días de 10:00 a 23:30 horas.',
+      'horarios': 'Estamos abiertos todos los días de 10:00 a 23:30 horas.',
+      'abierto': 'Estamos abiertos todos los días de 10:00 a 23:30 horas.',
+      'menu': 'Tenemos una variedad de hamburguesas artesanales. Puedes ver nuestra carta completa en la sección "Precios Hamburguesas".',
+      'carta': 'Tenemos una variedad de hamburguesas artesanales. Puedes ver nuestra carta completa en la sección "Precios Hamburguesas".',
+      'precio': 'Puedes ver todos nuestros precios en la sección "Precios Hamburguesas" de nuestra página.',
+      'precios': 'Puedes ver todos nuestros precios en la sección "Precios Hamburguesas" de nuestra página.',
+      'ubicacion': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
+      'donde': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
+      'direccion': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
+      'reserva': 'Puedes hacer tu reserva a través del formulario en la sección "Reserva o Contáctanos" o directamente por WhatsApp.',
+      'reservar': 'Puedes hacer tu reserva a través del formulario en la sección "Reserva o Contáctanos" o directamente por WhatsApp.',
+      'contacto': 'Puedes contactarnos a través del formulario de reservas o por WhatsApp al 662 93 38 32.',
+      'telefono': 'Puedes contactarnos por WhatsApp al 662 93 38 32.',
+      'instagram': 'Síguenos en Instagram: @onepice_burger',
+      'equipo': 'Nuestro equipo está formado por chefs expertos que crean hamburguesas únicas. Puedes conocerlos en la sección "Nuestro Equipo".',
+      'chef': 'Nuestro equipo está formado por chefs expertos que crean hamburguesas únicas. Puedes conocerlos en la sección "Nuestro Equipo".',
+      'hamburguesa': 'Ofrecemos hamburguesas artesanales con ingredientes de calidad. ¡Tenemos opciones para todos los gustos!',
+      'hamburguesas': 'Ofrecemos hamburguesas artesanales con ingredientes de calidad. ¡Tenemos opciones para todos los gustos!',
+      'one piece': '¡Sí! Somos una hamburguesería temática de One Piece. Ven a vivir la aventura gastronómica.',
+      'onepiece': '¡Sí! Somos una hamburguesería temática de One Piece. Ven a vivir la aventura gastronómica.',
+      'default': 'Lo siento, no entendí tu pregunta. Puedes preguntarme sobre horarios, menú, ubicación, reservas o nuestro equipo.'
+    };
+
+    // Find the best response for a question
+    function getResponse(question) {
+      const normalizedQuestion = normalizeText(question);
+      
+      // Check for exact matches first
+      for (const [key, response] of Object.entries(responses)) {
+        if (normalizedQuestion.includes(normalizeText(key))) {
+          return response;
+        }
+      }
+      
+      // Check for partial matches
+      for (const [key, response] of Object.entries(responses)) {
+        const normalizedKey = normalizeText(key);
+        if (normalizedQuestion.includes(normalizedKey)) {
+          return response;
+        }
+      }
+      
+      return responses.default;
+    }
+
+    // Add message to assistant
+    function addMessage(text, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('assistant-message');
+      messageDiv.classList.add(isUser ? 'user' : 'bot');
+      messageDiv.textContent = text;
+      assistantMessages.appendChild(messageDiv);
+      assistantMessages.scrollTop = assistantMessages.scrollHeight;
+    }
+
+    // Handle assistant input
+    function handleAssistantInput() {
+      const question = assistantInput.value.trim();
+      if (question) {
+        addMessage(question, true);
+        assistantInput.value = '';
+        
+        // Simulate thinking
+        setTimeout(() => {
+          const response = getResponse(question);
+          addMessage(response);
+        }, 500);
+      }
+    }
+
+    // Event listeners for assistant
+    assistantBtn.addEventListener('click', () => {
+      assistantPanel.classList.toggle('active');
+    });
+
+    assistantClose.addEventListener('click', () => {
+      assistantPanel.classList.remove('active');
+    });
+
+    assistantSend.addEventListener('click', handleAssistantInput);
+
+    assistantInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleAssistantInput();
+      }
     });
   </script>
 </body>
