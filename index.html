@@ -126,21 +126,22 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      background: linear-gradient(135deg, #ffb84c, #ff922b);
-      color: #111;
+      background: linear-gradient(135deg, #000000, #333333);
+      color: white;
       padding: 16px 32px;
       border-radius: 50px;
       font-weight: 700;
       font-size: 1.2rem;
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 8px 25px rgba(255, 184, 76, 0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       border: none;
       cursor: pointer;
     }
     .order-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(255, 184, 76, 0.4);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(135deg, #333333, #000000);
     }
     .order-btn i {
       font-size: 1.4rem;
@@ -165,6 +166,10 @@
     .schedule-table td{padding:12px 15px;}
     .schedule-table td:first-child{font-weight:600;color:var(--primary);}
     .schedule-table td:last-child{text-align:right;}
+    .closed {
+      color: #ff6b6b;
+      font-weight: 600;
+    }
 
     /* Contact */
     .contact-info {
@@ -422,11 +427,11 @@
       <a href="#about">Nosotros</a>
       <a href="#menu">Carta</a>
       <a href="#order">Pedir Ahora</a>
+      <a href="#reservas">Reservas</a>
       <a href="#schedule">Horario</a>
       <a href="#location">Ubicación</a>
       <a href="#crew">Nuestro Equipo</a>
       <a href="#gallery">Galería</a>
-      <a href="#contact">Contacto</a>
     </nav>
     <button class="mobile-menu-btn">
       <i class="fas fa-bars"></i>
@@ -440,11 +445,11 @@
     <a href="#about" class="mobile-nav-link">Nosotros</a>
     <a href="#menu" class="mobile-nav-link">Carta</a>
     <a href="#order" class="mobile-nav-link">Pedir Ahora</a>
+    <a href="#reservas" class="mobile-nav-link">Reservas</a>
     <a href="#schedule" class="mobile-nav-link">Horario</a>
     <a href="#location" class="mobile-nav-link">Ubicación</a>
     <a href="#crew" class="mobile-nav-link">Nuestro Equipo</a>
     <a href="#gallery" class="mobile-nav-link">Galería</a>
-    <a href="#contact" class="mobile-nav-link">Contacto</a>
   </div>
 
   <section class="hero">
@@ -478,34 +483,68 @@
     <h2>Pedir Ahora</h2>
     <p class="sub">¡Disfruta de OnePiece Burger desde casa!</p>
     <div class="order-now-container">
-      <a href="https://www.ibereats.com" target="_blank" class="order-btn">
+      <a href="https://www.ubereats.com/es/store/onepiece-burger/wBSHtdu_WGW1FLfNdKNdXQ?srsltid=AfmBOooDkliPGl8_N9Uy4UUO1EzrZeAtTRMkrkjTjk4KHYC1tzThqgid" target="_blank" class="order-btn">
         <i class="fas fa-motorcycle"></i>
-        Pedir en IberEats
+        Pedir en UberEats
       </a>
+    </div>
+  </section>
+
+  <section id="reservas">
+    <h2>Reservas</h2>
+    <p class="sub">Para reservar una mesa, llámanos directamente</p>
+    <div class="contact-info">
+      <div class="contact-card">
+        <div class="contact-item">
+          <i class="fas fa-phone-alt"></i>
+          <div class="contact-text">
+            <h3>Reservas por Teléfono</h3>
+            <p>662 93 38 32</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-whatsapp"></i>
+          <div class="contact-text">
+            <h3>WhatsApp</h3>
+            <p>Consulta rápida por WhatsApp</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="schedule">
     <h2>Horario</h2>
-    <p class="sub">Estamos abiertos todos los días para servirte</p>
+    <p class="sub">Estamos abiertos para servirte</p>
     <div class="schedule">
       <table class="schedule-table">
+        <tr><td>Lunes</td><td>10:00–23:30</td></tr>
+        <tr><td>Martes</td><td class="closed">Cerrado</td></tr>
+        <tr><td>Miércoles</td><td>10:00–23:30</td></tr>
+        <tr><td>Jueves</td><td>10:00–23:30</td></tr>
         <tr><td>Viernes</td><td>10:00–23:30</td></tr>
         <tr><td>Sábado</td><td>10:00–23:30</td></tr>
         <tr><td>Domingo</td><td>10:00–23:30</td></tr>
-        <tr><td>Lunes</td><td>10:00–23:30</td></tr>
-        <tr><td>Martes</td><td>10:00–23:30</td></tr>
-        <tr><td>Miércoles</td><td>10:00–23:30</td></tr>
-        <tr><td>Jueves</td><td>10:00–23:30</td></tr>
       </table>
     </div>
   </section>
 
   <section id="location">
     <h2>Ubicación</h2>
-    <p class="sub">Encuéntranos en el corazón de Tarragona</p>
+    <p class="sub">Encuéntranos en Tarragona</p>
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.113370557387!2d1.255415215424835!3d41.31590297927086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a37f5b6f5b5b5b%3A0x9b8c5b5b5b5b5b5b!2sPla%C3%A7a%20de%20la%20Font%2C%2047%2C%2043003%20Tarragona!5e0!3m2!1ses!2ses!4v1647000000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2994.395258215843!2d1.228787215425294!3d41.33087997926902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a37f5b6f5b5b5b%3A0x9b8c5b5b5b5b5b5b!2sCarrer%20Riu%20Bes%C3%B2s%2C%202%2C%2043006%20Tarragona!5e0!3m2!1ses!2ses!4v1647000000000!5m2!1ses!2ses" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <div class="contact-info">
+      <div class="contact-card">
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="contact-text">
+            <h3>Dirección</h3>
+            <p>Carrer Riu Besòs, 2, 43006 Tarragona</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -525,36 +564,6 @@
       <img src="IMG_7508.jpeg" alt="Hamburguesa doble Carne Smash">
       <img src="IMG_7509.jpeg" alt="Hamburguesas">
       <img src="IMG_7510.jpeg" alt="Zoro Roronoa">
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Reserva o Contáctanos</h2>
-    <p class="sub">Para reservas, llámanos directamente. ¡Te esperamos en nuestra hamburguesería!</p>
-    <div class="contact-info">
-      <div class="contact-card">
-        <div class="contact-item">
-          <i class="fas fa-phone-alt"></i>
-          <div class="contact-text">
-            <h3>Reservas por Teléfono</h3>
-            <p>662 93 38 32</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <div class="contact-text">
-            <h3>Dirección</h3>
-            <p>Plaça de la Font, 47, 43003 Tarragona</p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <i class="fab fa-whatsapp"></i>
-          <div class="contact-text">
-            <h3>WhatsApp</h3>
-            <p>Consulta rápida por WhatsApp</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -676,21 +685,24 @@
     // Assistant responses
     const responses = {
       'hola': '¡Hola! ¿En qué puedo ayudarte? Puedes preguntarme sobre nuestro horario, menú, ubicación o cómo hacer una reserva.',
-      'horario': 'Estamos abiertos todos los días de 10:00 a 23:30 horas.',
-      'horarios': 'Estamos abiertos todos los días de 10:00 a 23:30 horas.',
-      'abierto': 'Estamos abiertos todos los días de 10:00 a 23:30 horas.',
+      'horario': 'Estamos abiertos de Lunes a Domingo de 10:00 a 23:30, excepto los Martes que estamos cerrados.',
+      'horarios': 'Estamos abiertos de Lunes a Domingo de 10:00 a 23:30, excepto los Martes que estamos cerrados.',
+      'abierto': 'Estamos abiertos de Lunes a Domingo de 10:00 a 23:30, excepto los Martes que estamos cerrados.',
+      'cerrado': 'Los Martes estamos cerrados. El resto de días abrimos de 10:00 a 23:30.',
+      'martes': 'Los Martes estamos cerrados. El resto de días abrimos de 10:00 a 23:30.',
       'menu': 'Tenemos una variedad de hamburguesas artesanales. Puedes ver nuestra carta completa en la sección "Precios Hamburguesas".',
       'carta': 'Tenemos una variedad de hamburguesas artesanales. Puedes ver nuestra carta completa en la sección "Precios Hamburguesas".',
       'precio': 'Puedes ver todos nuestros precios en la sección "Precios Hamburguesas" de nuestra página.',
       'precios': 'Puedes ver todos nuestros precios en la sección "Precios Hamburguesas" de nuestra página.',
-      'ubicacion': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
-      'donde': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
-      'direccion': 'Nos encontramos en Plaça de la Font, 47, 43003 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
+      'ubicacion': 'Nos encontramos en Carrer Riu Besòs, 2, 43006 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
+      'donde': 'Nos encontramos en Carrer Riu Besòs, 2, 43006 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
+      'direccion': 'Nos encontramos en Carrer Riu Besòs, 2, 43006 Tarragona. Puedes ver nuestra ubicación exacta en la sección "Ubicación".',
       'reserva': 'Para reservas, puedes llamarnos al 662 93 38 32. ¡Estaremos encantados de atenderte!',
       'reservar': 'Para reservas, puedes llamarnos al 662 93 38 32. ¡Estaremos encantados de atenderte!',
-      'pedir': 'Puedes pedir a través de IberEats. Haz clic en el botón "Pedir Ahora" en nuestra página.',
-      'delivery': 'Puedes pedir a través de IberEats. Haz clic en el botón "Pedir Ahora" en nuestra página.',
-      'domicilio': 'Puedes pedir a través de IberEats. Haz clic en el botón "Pedir Ahora" en nuestra página.',
+      'pedir': 'Puedes pedir a través de UberEats. Haz clic en el botón "Pedir Ahora" en nuestra página.',
+      'delivery': 'Puedes pedir a través de UberEats. Haz clic en el botón "Pedir Ahora" en nuestra página.',
+      'domicilio': 'Puedes pedir a través de UberEats. Haz clic en el botón "Pedir Ahora" en nuestra página.',
+      'ubereats': 'Puedes pedir a través de UberEats. Haz clic en el botón "Pedir Ahora" en nuestra página.',
       'contacto': 'Puedes contactarnos por teléfono al 662 93 38 32 o por WhatsApp.',
       'telefono': 'Puedes contactarnos por teléfono al 662 93 38 32.',
       'instagram': 'Síguenos en Instagram: @onepice_burger',
